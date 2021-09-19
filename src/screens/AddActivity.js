@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Box, Text, FormControl, Input, Pressable, Button } from "native-base";
+import { Box, Text, FormControl, Input, Pressable } from "native-base";
 import { Platform } from "react-native";
 import styles from "./style/addActivity";
 import { LinearGradient } from "expo-linear-gradient";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function AddActivity() {
+export default function AddActivity({ navigation }) {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("");
   const [show, setShow] = useState(false);
@@ -41,7 +41,9 @@ export default function AddActivity() {
 
   return (
     <LinearGradient colors={["#96BAFF", "#7C83FD"]} style={styles.box}>
-      <Text style={styles.textTitle}>Enter Your Activity Here</Text>
+      <Text style={styles.textTitle} fontWeight="medium">
+        Enter Your Activity Here
+      </Text>
       <FormControl mt={10}>
         <FormControl.Label _text={{ color: "white", fontSize: 18 }}>
           Activity :
@@ -50,8 +52,10 @@ export default function AddActivity() {
           <Input color="primary.50" placeholder="enter your activity" />
         </Box>
       </FormControl>
+      <FormControl.Label mt={5} _text={{ color: "white", fontSize: 18 }}>
+        Date :
+      </FormControl.Label>
       <Pressable
-        mt={5}
         style={styles.formDateTime}
         title="Date"
         onPress={() => showMode("date")}
@@ -61,8 +65,10 @@ export default function AddActivity() {
         </Text>
         <Ionicons name="calendar-outline" size={28} color="#5F67FF"></Ionicons>
       </Pressable>
+      <FormControl.Label mt={5} _text={{ color: "white", fontSize: 18 }}>
+        Time :
+      </FormControl.Label>
       <Pressable
-        mt={5}
         style={styles.formDateTime}
         title="Time"
         onPress={() => showMode("time")}
@@ -83,6 +89,13 @@ export default function AddActivity() {
       )}
       <Pressable mt={10} bg="primary.50" style={styles.btnAddActivity}>
         <Text style={styles.textAddActivity}>Add Activity</Text>
+      </Pressable>
+      <Pressable
+        mt={10}
+        onPress={() => navigation.navigate("Activity")}
+        style={styles.btnGoBack}
+      >
+        <Text style={styles.textGoBack}>Go back</Text>
       </Pressable>
     </LinearGradient>
   );

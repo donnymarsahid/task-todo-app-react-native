@@ -22,10 +22,10 @@ export default function App() {
         normal: "Quicksand_400Regular",
       },
       500: {
-        medium: "Quicksand_500Medium",
+        normal: "Quicksand_500Medium",
       },
       600: {
-        semiBold: "Quicksand_600SemiBold",
+        normal: "Quicksand_600SemiBold",
       },
     },
   };

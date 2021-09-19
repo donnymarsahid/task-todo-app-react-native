@@ -5,6 +5,7 @@ export default StyleSheet.create({
     height: "100%",
     width: "100%",
     padding: 22,
+    paddingTop: 100,
   },
   textTitle: {
     fontSize: 24,

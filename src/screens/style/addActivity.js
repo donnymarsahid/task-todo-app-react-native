@@ -5,6 +5,7 @@ export default StyleSheet.create({
     height: "100%",
     width: "100%",
     padding: 22,
+    paddingTop: 100,
   },
   textTitle: {
     fontSize: 24,
@@ -27,6 +28,18 @@ export default StyleSheet.create({
     fontSize: 16,
     textTransform: "uppercase",
     letterSpacing: 1,
+  },
+  btnGoBack: {
+    height: 58,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  textGoBack: {
+    color: "#FFF",
+    fontSize: 16,
+    textTransform: "uppercase",
+    letterSpacing: 2,
   },
   formDateTime: {
     backgroundColor: "#FFF",

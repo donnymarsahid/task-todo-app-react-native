@@ -2,6 +2,7 @@ import * as React from "react";
 import Activity from "./src/screens/Activity";
 import History from "./src/screens/History";
 import AddActivity from "./src/screens/AddActivity";
+import Login from "./src/screens/Login";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -11,6 +12,8 @@ const Stack = createStackNavigator();
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
+import Register from "./src/screens/Register";
+import Profile from "./src/screens/Profile";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,9 +24,7 @@ function MyTab() {
     <Tab.Navigator
       initialRouteName="Activity"
       screenOptions={({ route }) => ({
-        headerMode: "screen",
-        headerTintColor: "white",
-        headerStyle: { backgroundColor: theme.colors.primary["300"] },
+        headerShown: false,
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           if (route.name === "Activity") {
@@ -31,17 +32,20 @@ function MyTab() {
               ? "ios-color-filter"
               : "ios-color-filter-outline";
           } else if (route.name === "History") {
-            iconName = focused ? "ios-calendar" : "ios-calendar-outline";
+            iconName = focused ? "ios-pie-chart" : "ios-pie-chart-outline";
+          } else if (route.name === "Profile") {
+            iconName = focused ? "ios-person" : "ios-person-outline";
           }
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: theme.colors.primary["800"],
+        tabBarActiveTintColor: theme.colors.primary["700"],
         tabBarInactiveTintColor: "gray",
       })}
     >
       <Tab.Screen name="Activity" component={Activity} />
       <Tab.Screen name="History" component={History} />
+      <Tab.Screen name="Profile" component={Profile} />
     </Tab.Navigator>
   );
 }
@@ -69,6 +73,31 @@ export default function Container() {
           component={AddActivity}
           options={{
             title: "Add Activity",
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{
+            title: "Login",
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
+          options={{
+            title: "Register",
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            title: "Profile",
+            headerShown: false,
           }}
         />
       </Stack.Navigator>
