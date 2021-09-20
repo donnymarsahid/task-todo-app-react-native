@@ -56,5 +56,5 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
-  textDanger: { textAlign: "center", marginTop: 8, color: "red" },
+  textWarning: { textAlign: "center", marginTop: 8, color: "red" },
 });

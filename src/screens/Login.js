@@ -2,40 +2,41 @@ import React, { useState } from "react";
 import styles from "./style/login";
 import { LinearGradient } from "expo-linear-gradient";
 import { Box, Text, FormControl, Input, Pressable } from "native-base";
-import api from "./config/api";
-import axios from "axios";
+import api from "../config/api";
+import { AsyncStorage } from "react-native";
 
 export default function Login({ navigation }) {
-  const [username, setUserName] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const [message, setMessage] = useState("");
 
   const handlerSubmit = () => {
-    const body = JSON.stringify({
-      username: username,
-      password: password,
-    });
-
-    axios
-      .post("https://todo-app-portfolio-donny.herokuapp.com/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body,
+    if (username === "" || password === "") {
+      setMessage("Enter username / password !");
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
+      return false;
+    }
+    api
+      .post("/login", {
+        username: username,
+        password: password,
       })
-      .then((res) => {
+      .then(async (res) => {
         console.log(res.data);
         if (res.data.message) {
           setMessage(res.data.message);
           setTimeout(() => {
             setMessage("");
           }, 3000);
+        } else {
+          alert("success login");
+          await AsyncStorage.setItem("token", res.data.token);
+          await AsyncStorage.setItem("idUser", res.data.data.id);
+          navigation.navigate("Activity");
         }
-      })
-      .catch((err) => {
-        console.log(err);
       });
   };
 
@@ -51,7 +52,7 @@ export default function Login({ navigation }) {
         <Text style={styles.textLogin} color="primary.50" fontWeight="medium">
           LOGIN
         </Text>
-        <Text color="red" style={styles.textDanger}>
+        <Text color="red" style={styles.textWarning}>
           {message}
         </Text>
         <FormControl mt={2}>
@@ -62,7 +63,7 @@ export default function Login({ navigation }) {
             <Input
               color="primary.50"
               placeholder="enter your username"
-              onChangeText={(text) => setUserName(text)}
+              onChangeText={(text) => setUsername(text)}
             />
           </Box>
         </FormControl>

@@ -25,7 +25,7 @@ export default StyleSheet.create({
   boxLogin: {
     backgroundColor: "#FFF",
     width: "100%",
-    height: 520,
+    height: 535,
     borderRadius: 8,
     marginTop: 25,
     padding: 20,
@@ -56,4 +56,5 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
+  textWarning: { textAlign: "center", marginTop: 8, color: "red" },
 });

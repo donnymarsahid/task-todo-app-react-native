@@ -14,6 +14,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import Register from "./src/screens/Register";
 import Profile from "./src/screens/Profile";
+import UpdateActivity from "./src/screens/UpdateActivity";
 
 const Tab = createBottomTabNavigator();
 
@@ -97,6 +98,14 @@ export default function Container() {
           component={Profile}
           options={{
             title: "Profile",
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="UpdateActivity"
+          component={UpdateActivity}
+          options={{
+            title: "UpdateActivity",
             headerShown: false,
           }}
         />

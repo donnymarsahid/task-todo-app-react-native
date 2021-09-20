@@ -53,4 +53,5 @@ export default StyleSheet.create({
   textDateTime: {
     paddingBottom: 6,
   },
+  textWarning: { textAlign: "center", marginTop: 8, color: "red" },
 });

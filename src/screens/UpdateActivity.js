@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Text, FormControl, Input, Pressable } from "native-base";
 import { AsyncStorage, Platform } from "react-native";
 import styles from "./style/addActivity";
@@ -7,7 +7,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { Ionicons } from "@expo/vector-icons";
 import api from "../config/api";
 
-export default function AddActivity({ navigation }) {
+export default function UpdateActivity({ navigation, route }) {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("");
   const [show, setShow] = useState(false);
@@ -15,6 +15,21 @@ export default function AddActivity({ navigation }) {
   const [textTime, setTextTime] = useState("00:00");
   const [activity, setActivity] = useState("");
   const [message, setMessage] = useState("");
+
+  const [activities, setActivities] = useState([]);
+
+  //   const findUpdateActivity = activities.find(data => data.id === id)
+
+  useEffect(() => {
+    _updateActivity();
+  }, []);
+
+  const _updateActivity = async () => {
+    const idUser = await AsyncStorage.getItem("idUser");
+    const response = await api.get("/todo/" + idUser);
+    console.log(route.params.id);
+    console.log(response.data.activities);
+  };
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -43,31 +58,13 @@ export default function AddActivity({ navigation }) {
   };
 
   const handlerSubmit = async () => {
-    if (activity === "" || textDate === "mm-dd-yyyy" || textTime === "00:00") {
-      setMessage("Input your activity !");
-      setTimeout(() => {
-        setMessage("");
-      }, 3000);
-      return false;
-    }
-    console.log(textDate);
-    console.log(textTime);
-    console.log(activity);
-
-    const idUser = await AsyncStorage.getItem("idUser");
-    const response = await api.post("/todo/" + idUser, {
-      activity,
-      date: textDate,
-      time: textTime,
-    });
-
-    console.log(response.data);
+    alert("ok");
   };
 
   return (
     <LinearGradient colors={["#96BAFF", "#7C83FD"]} style={styles.box}>
       <Text style={styles.textTitle} fontWeight="medium">
-        Enter Your Activity Here
+        Update Activity
       </Text>
       <Text mt={5} style={styles.textWarning}>
         {message}
@@ -125,7 +122,7 @@ export default function AddActivity({ navigation }) {
         style={styles.btnAddActivity}
         onPress={() => handlerSubmit()}
       >
-        <Text style={styles.textAddActivity}>Add Activity</Text>
+        <Text style={styles.textAddActivity}>Update Activity</Text>
       </Pressable>
       <Pressable
         mt={10}
